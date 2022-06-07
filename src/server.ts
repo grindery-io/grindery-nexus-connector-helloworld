@@ -10,8 +10,10 @@ app.use(bodyParser.json());
 
 app.use((_req, res) => res.send("Hello World!"));
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const wss = new Server({ server: app as any });
+const port = parseInt(process.env.PORT || "", 10) || 3000;
+console.log(`Listening on port ${port}`);
+const server = app.listen(port);
+const wss = new Server({ server });
 wss.on("connection", (ws) => {
   console.log("Client connected");
   ws.on("message", function message(data) {
@@ -30,7 +32,4 @@ wss.on("connection", (ws) => {
   ws.on("close", () => console.log("Client disconnected"));
 });
 
-const port = parseInt(process.env.PORT || "", 10) || 3000;
 
-console.log(`Listening on port ${port}`);
-app.listen(port);
