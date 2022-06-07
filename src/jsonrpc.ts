@@ -26,9 +26,7 @@ const exceptionMiddleware = async (next, request, serverParams) => {
     }
   }
 };
-function byObject<T extends { [key: string]: unknown }>(
-  func: (params: T, extra: { socket: WebSocket }) => unknown
-) {
+function byObject<T extends { [key: string]: unknown }>(func: (params: T, extra: { socket: WebSocket }) => unknown) {
   return async function (params: Partial<JSONRPCParams> | undefined, extra) {
     if (typeof params !== "object" || Array.isArray(params)) {
       throw new InvalidParamsError("Only parameter object are supported");
