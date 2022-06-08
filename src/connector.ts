@@ -41,7 +41,7 @@ class HelloWorldTrigger {
     this.ws.send(
       JSON.stringify({
         jsonrpc: "2.0",
-        method: "update",
+        method: "notifySignal",
         params: { key: this.input.key, sessionId: this.input.sessionId, payload },
       })
     );
