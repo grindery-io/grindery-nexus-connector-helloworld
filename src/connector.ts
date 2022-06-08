@@ -38,7 +38,13 @@ class HelloWorldTrigger {
     if (!this.running) {
       return;
     }
-    this.ws.send(JSON.stringify({ key: this.input.key, sessionId: this.input.sessionId, payload }));
+    this.ws.send(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "update",
+        params: { key: this.input.key, sessionId: this.input.sessionId, payload },
+      })
+    );
   }
   main() {
     this.running = true;
