@@ -52,11 +52,13 @@ class HelloWorldTrigger {
     this.running = true;
     const send = () => {
       if (!this.running) {
+        addDebugOutput(`[${this.input.sessionId}] Stopping trigger`);
         return;
       }
       addDebugOutput(`[${this.input.sessionId}] Sending signal`);
       this.sendNotification({ random: `ABC-${uuidv4()}` });
       if (this.fields.recurring) {
+        addDebugOutput(`[${this.input.sessionId}] Will trigger again in ${this.fields.interval}ms`);
         setTimeout(send, this.fields.interval);
       }
     };
