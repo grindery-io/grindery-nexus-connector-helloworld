@@ -8,7 +8,16 @@ import { Response } from "./utils";
 const app = express();
 app.use(bodyParser.json());
 
-app.use((_req, res) => res.send("Hello World!"));
+let debugOutput = "Hello World!";
+
+export function addDebugOutput(output: string) {
+  if (debugOutput.length > 10000) {
+    debugOutput = "(truncated)";
+  }
+  debugOutput += `\n[${new Date().toISOString()}] ${output}`;
+}
+
+app.use((_req, res) => res.type("text/plain").send(debugOutput));
 
 const port = parseInt(process.env.PORT || "", 10) || 3000;
 

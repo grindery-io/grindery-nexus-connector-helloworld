@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import WebSocket from "ws";
+import { addDebugOutput } from "./server";
 
 type WebSocketPayloadCommon = {
   key: string;
@@ -24,6 +25,7 @@ class HelloWorldTrigger {
   constructor(private ws: WebSocket, private input: ConnectorInput) {
     this.fields = input.fields as HelloWorldTriggerFields;
     console.log("HelloWorldTrigger", input);
+    addDebugOutput(`[${this.input.sessionId}] Setting up trigger with ${JSON.stringify(this.fields)}`);
     if (ws.readyState !== WebSocket.OPEN) {
       return;
     }
@@ -52,6 +54,7 @@ class HelloWorldTrigger {
       if (!this.running) {
         return;
       }
+      addDebugOutput(`[${this.input.sessionId}] Sending signal`);
       this.sendNotification({ random: `ABC-${uuidv4()}` });
       if (this.fields.recurring) {
         setTimeout(send, this.fields.interval);
@@ -75,6 +78,7 @@ export async function runAction(params: ConnectorInput): Promise<ConnectorOutput
       message: string;
     };
     console.log(`Hello World! ${fields.message}`);
+    addDebugOutput(`[${params.sessionId}] Hello World! ${fields.message}`);
     return {
       key: params.key,
       sessionId: params.sessionId,
