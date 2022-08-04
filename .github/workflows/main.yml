@@ -26,6 +26,6 @@ jobs:
               inputs: {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: process.env.GITHUB_REF,
+                ref: process.env.GITHUB_REF_NAME,
               },
             });
