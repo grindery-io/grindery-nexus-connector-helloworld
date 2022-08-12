@@ -1,0 +1,12 @@
+{
+    "jsonrpc": "2.0",
+    "method": "setupSignal",
+    "params": {
+      "key": "helloWorldTrigger",
+      "fields": {
+        "interval": 10000,
+        "recurring": true
+      }
+    },
+    "id": 1
+  }
