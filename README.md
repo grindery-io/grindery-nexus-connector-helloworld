@@ -3,13 +3,19 @@
 
 ## Development
 
-For testing the connector, please run:
+A connector can contain any number of actions and triggers. See [connector.ts](src/connector.ts) for the sample implementation.
+
+To test the connector, we can use `npm run local:action` and `npm run local:trigger` commands. They accept 2 parameters: `key` and `fields`. Example:
 
 ```
-npm run server
+npm run local:action helloWorldAction '{"message":"Test"}'
 ```
 
-then [connect to the server via WebSocket](https://www.piesocket.com/websocket-tester) and send JSON-RPC request with "setupSignal" or "runAction" as method name. Check [the sampleMessages folder](sampleMessages) for message samples.
+```
+npm run local:trigger helloWorldTrigger '{"interval":1000,"recurring":true}'
+```
+
+The connector will be run as a WebSocket server after deployment, to test it in production setting, run `npm run server`.
 
 
 ## CDS file
