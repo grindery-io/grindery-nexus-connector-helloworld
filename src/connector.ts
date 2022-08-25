@@ -5,6 +5,7 @@ import {
   TriggerBase,
   ConnectorDefinition,
   ActionOutput,
+  WebhookParams,
 } from "grindery-nexus-common-utils/dist/connector";
 
 let debugOutput = "Hello World!";
@@ -52,9 +53,20 @@ async function helloWorldAction(params: ConnectorInput<unknown>): Promise<Action
   };
 }
 
+async function onWebhook(params: ConnectorInput<WebhookParams>): Promise<ActionOutput> {
+  console.log("Webhook received:", params.fields);
+  addDebugOutput(`[${params.sessionId}] Webhook received: ` + JSON.stringify(params.fields));
+  return {
+    payload: {
+      message: "Hello World!",
+    },
+  };
+}
+
 export const CONNECTOR_DEFINITION: ConnectorDefinition = {
   actions: { helloWorldAction },
   triggers: { helloWorldTrigger: HelloWorldTrigger },
+  onWebhook,
   options: {
     mutateRoutes: (app) => {
       app.get("/debug", (req, res) => res.type("text").send(debugOutput).end());

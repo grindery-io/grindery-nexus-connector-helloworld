@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "grindery-nexus-common-utils": "^1.0.1",
+    "grindery-nexus-common-utils": "^1.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
