@@ -26,7 +26,7 @@ Grindery Nexus supports HTTP inbound webhook for connectors, the URL is somethin
 https://orchestrator.grindery.org/webhook/:connector_key/:trigger_key/:path
 ```
 
-You can handle webhooks with `onWebhook` function in [src/connector.ts](src/connector.ts).
+You can handle webhooks with `webhooks` parameter in `ConnectorDefinition`, see [src/connector.ts](src/connector.ts).
 
 ## CDS file
 
